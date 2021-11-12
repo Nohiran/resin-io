@@ -8,12 +8,16 @@
   <body>
     <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
     <script src="./bootstrap.js"></script>
-    <section class="block", id="clock">
-      <div class="digital_clock", id="digital_clock"></div>
-    </section>
-    <section class="block", id="resin">
-      <div class="resin_scroll", id="resin_scroll"></div>
+    <div class="block", id="clock">
+      <div id="analog_clock_frame">
+        <div id="analog_clock_hour"></div>
+        <div id="analog_clock_min"></div>
+      </div>
+      <div id="digital_clock"></div>
+    </div>
+    <div class="block", id="resin">
+      <div id="resin_scroll"></div>
       <img src="assets/images/Item_Fragile_Resin.webp">
-    </section>
+    </div>
   </body>
 </html>

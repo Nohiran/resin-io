@@ -36,17 +36,26 @@ var digital_clock = document.getElementById("digital_clock");
 var rc = ResinClock.new(MAX_RESIN_COUNT, 8);
 
 function on_resin_scroll(e) {
-    let new_resin_count = Math.round(resin_scroll.scrollTop / resin_number_height);
-    if (new_resin_count != resin_count) {
-        resin_scroll.children[resin_count].style.color = null;
-        resin_scroll.children[new_resin_count].style.color = "black";
+    let old_resin_count = resin_count;
+    resin_count = Math.round(resin_scroll.scrollTop / resin_number_height);
+    if (resin_count != old_resin_count) {
+        resin_scroll.children[old_resin_count].style.color = null;
+        resin_scroll.children[resin_count].style.color = "black";
 
-        digital_clock.textContent = rc.resin_to_clock(resin_count).toString();
+        let date = rc.resin_to_clock(resin_count);
+        let h = String(date.getHours()).padStart(2, "0");
+        let m = String(date.getMinutes()).padStart(2, "0");
+        digital_clock.textContent = h + ":" + m;
     }
-    resin_count = new_resin_count;
-
-    window.clearTimeout(scroll_timeout);
-    scroll_timeout = window.setTimeout(function() {
-        resin_scroll.scrollTop = resin_number_height * resin_count;
-    }, 300);
 }
+
+var h = 0;
+var m = 90;
+var ch = document.getElementById("analog_clock_hour");
+var cm = document.getElementById("analog_clock_min");
+window.setInterval(function() {
+    h += 1;
+    ch.style.transform = "rotate(" + String(h - 90) + "deg)";
+    m += 1;
+    cm.style.transform = "rotate(" + String(m - h) + "deg)";
+});

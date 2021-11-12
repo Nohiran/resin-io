@@ -1,3 +1,9 @@
+* {
+    margin: auto;
+    padding: auto;
+    justify-content: center;
+}
+
 body {
     position: absolute;
     top: 5%;
@@ -7,7 +13,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     overflow: auto;
 }
 
@@ -15,21 +20,59 @@ body {
     display: flex;
 }
 
-.digital_clock {
-    font-size: 3rem;
+#analog_clock_frame {
+    position: relative;
+    background-color: lightgray;
+    width: min(45vmax, 90vmin);
+    height: min(45vmax, 90vmin);
+    border-radius: 50%;
+    border: 1em;
 }
 
-.resin_scroll {
-    margin: auto;
-    width: 10rem;
-    height: 10.8rem;
+#analog_clock_hour {
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    top: 49%;
+    left: 50%;
+    background-color: lightgreen;
+    width: 50%;
+    height: 2%;
+    transform-origin: left center;
+    border-radius: 50vmin;
+}
+
+#analog_clock_min {
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    top: 49%;
+    left: 50%;
+    background-color: lightseagreen;
+    width: 46%;
+    height: 2%;
+    transform-origin: left center;
+    border-radius: 50vmin;
+}
+
+#digital_clock {
+    font-size: 3em;
+}
+
+#resin_scroll {
+    width: 10em;
+    height: 10.8em;
     line-height: 1.2;
-    overflow: auto;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-margin-top: 0px;
 }
 
 .resin_number {
-    /* font-family: monospace; */
-    font-size: 3rem;
+    margin: 0px;
+    padding: 0px;
+    font-size: 3em;
     text-align: center;
     color: lightgray;
+    scroll-snap-align: start;
 }
