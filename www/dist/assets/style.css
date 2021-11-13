@@ -22,24 +22,14 @@ body {
 
 #analog_clock_frame {
     position: relative;
-    background-color: lightgray;
     width: min(45vmax, 90vmin);
     height: min(45vmax, 90vmin);
-    border-radius: 50%;
     border: 1em;
 }
 
-#analog_clock_hour {
-    margin: 0px;
-    padding: 0px;
-    position: absolute;
-    top: 49%;
-    left: 50%;
-    background-color: lightgreen;
-    width: 50%;
-    height: 2%;
-    transform-origin: left center;
-    border-radius: 50vmin;
+#analog_clock_background {
+    width: 100%;
+    height: 100%;
 }
 
 #analog_clock_min {
@@ -48,18 +38,43 @@ body {
     position: absolute;
     top: 49%;
     left: 50%;
-    background-color: lightseagreen;
-    width: 46%;
+    background-color: rgb(87, 76, 63);
+    width: 50%;
+    height: 2%;
+    transform-origin: left center;
+    border-radius: 50vmin;
+}
+
+#analog_clock_hour {
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    top: 49%;
+    left: 50%;
+    background-color: rgb(87, 76, 63);
+    width: 28%;
     height: 2%;
     transform-origin: left center;
     border-radius: 50vmin;
 }
 
 #digital_clock {
-    font-size: 1em;
+    font-size: 3em;
+    text-align: center;
+    color: darkgray;
+    position: absolute;
+    top: 40%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+}
+
+#resin_image {
+    width: 10em;
+    height: 10em;
 }
 
 #resin_scroll {
+    background-color: rgb(250, 250, 250);
     width: 10em;
     height: 12em;
     overflow-y: scroll;
@@ -71,7 +86,7 @@ body {
     margin: 0px;
     padding: 0px;
     font-size: 3em;
-    height: calc(100% / 3);
+    height: calc(100% / 3.0);
     text-align: center;
     color: lightgray;
     scroll-snap-align: center;

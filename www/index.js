@@ -1,4 +1,5 @@
 import { ResinClock } from "resin-io-wasm";
+import { Clock } from "./scripts/clock.js";
 
 const MAX_RESIN_COUNT = 160;
 
@@ -29,8 +30,8 @@ for (let i = 0; i < resin_numbers.length; i++) {
     resin_scroll.appendChild(number);
 }
 
-var scroll_timeout = null;
 var resin_count = 0;
+var clock = new Clock();
 resin_scroll.addEventListener("scroll", on_resin_scroll, {capture: true});
 var digital_clock = document.getElementById("digital_clock");
 var rc = ResinClock.new(MAX_RESIN_COUNT, 8);
@@ -38,6 +39,7 @@ var rc = ResinClock.new(MAX_RESIN_COUNT, 8);
 function on_resin_scroll(e) {
     let old_resin_count = resin_count;
     resin_count = Math.round(resin_scroll.scrollTop / resin_number_height);
+    resin_count = Math.max(Math.min(MAX_RESIN_COUNT, resin_count), 0);
     if (resin_count != old_resin_count) {
         resin_scroll.children[old_resin_count].style.color = null;
         resin_scroll.children[resin_count].style.color = "black";
@@ -46,16 +48,6 @@ function on_resin_scroll(e) {
         let h = String(date.getHours()).padStart(2, "0");
         let m = String(date.getMinutes()).padStart(2, "0");
         digital_clock.textContent = h + ":" + m;
+        clock.draw(date);
     }
 }
-
-var h = 0;
-var m = 90;
-var ch = document.getElementById("analog_clock_hour");
-var cm = document.getElementById("analog_clock_min");
-window.setInterval(function() {
-    h += 1;
-    ch.style.transform = "rotate(" + String(h - 90) + "deg)";
-    m += 1;
-    cm.style.transform = "rotate(" + String(m - h) + "deg)";
-});
