@@ -26,8 +26,8 @@ export class Resin {
         let new_count = Math.round(this.resin_scroll.scrollTop / this.resin_number_height);
         this.count = Math.max(Math.min(MAX_RESIN_COUNT, new_count), 0);
         if (this.count != old_resin_count) {
-            this.resin_scroll.children[old_resin_count].style.color = null;
-            this.resin_scroll.children[this.count].style.color = "black";
+            this.resin_scroll.children[old_resin_count].className = "resin_number";
+            this.resin_scroll.children[this.count].className = "selected_resin_number";
             return true;
         }
     }
