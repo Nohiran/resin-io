@@ -20,8 +20,6 @@
     }
 }
 
-
-
 body {
     position: absolute;
     top: 5%;
@@ -32,10 +30,21 @@ body {
     flex-direction: column;
     align-items: center;
     overflow: auto;
-    background-image: var(--background-image);
-    background-size: cover;
-    background-attachment: fixed;
+}
+
+body::before {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
     background-position: center center;
+    background-size: cover;
+    background-image: var(--background-image);
+    background-repeat: no-repeat;
 }
 
 .block {
