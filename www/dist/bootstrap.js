@@ -55,6 +55,15 @@
 /******/ 		"../pkg/resin_io_bg.wasm": function() {
 /******/ 			return {
 /******/ 				"./resin_io_bg.js": {
+/******/ 					"__wbindgen_object_drop_ref": function(p0i32) {
+/******/ 						return installedModules["../pkg/resin_io_bg.js"].exports["__wbindgen_object_drop_ref"](p0i32);
+/******/ 					},
+/******/ 					"__wbg_getHours_e35735d153867e70": function(p0i32) {
+/******/ 						return installedModules["../pkg/resin_io_bg.js"].exports["__wbg_getHours_e35735d153867e70"](p0i32);
+/******/ 					},
+/******/ 					"__wbg_getMinutes_200bfb3f3e42d17d": function(p0i32) {
+/******/ 						return installedModules["../pkg/resin_io_bg.js"].exports["__wbg_getMinutes_200bfb3f3e42d17d"](p0i32);
+/******/ 					},
 /******/ 					"__wbg_new0_fd3a3a290b25cdac": function() {
 /******/ 						return installedModules["../pkg/resin_io_bg.js"].exports["__wbg_new0_fd3a3a290b25cdac"]();
 /******/ 					},
@@ -168,7 +177,7 @@
 /******/ 				promises.push(installedWasmModuleData);
 /******/ 			else {
 /******/ 				var importObject = wasmImportObjects[wasmModuleId]();
-/******/ 				var req = fetch(__webpack_require__.p + "" + {"../pkg/resin_io_bg.wasm":"40ce55bca34beaeb13bb"}[wasmModuleId] + ".module.wasm");
+/******/ 				var req = fetch(__webpack_require__.p + "" + {"../pkg/resin_io_bg.wasm":"b78c7786afc633145259"}[wasmModuleId] + ".module.wasm");
 /******/ 				var promise;
 /******/ 				if(importObject instanceof Promise && typeof WebAssembly.compileStreaming === 'function') {
 /******/ 					promise = Promise.all([WebAssembly.compileStreaming(req), importObject]).then(function(items) {
