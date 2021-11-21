@@ -7,6 +7,7 @@
 :root {
     --body-background: white;
     --element-background: hsl(0, 0%, 93%);
+    --clock-needle: hsl(0, 0%, 50%);
     --clock-border: dimgray;
     --resin-square: lightgray;
     --resin-round: white;
@@ -17,6 +18,7 @@
     :root {
         --body-background: black;
         --element-background: hsl(0, 0%, 12%);
+        --clock-needle: hsl(0, 0%, 50%);
         --clock-border: gray;
         --resin-square: dimgray;
         --resin-round: black;
@@ -95,7 +97,7 @@ body {
     position: absolute;
     top: 49%;
     left: 50%;
-    background-color: rgb(87, 76, 63);
+    background-color: var(--clock-needle);
     width: 47.5%;
     height: 2%;
     transform-origin: left center;
@@ -108,7 +110,7 @@ body {
     position: absolute;
     top: 49%;
     left: 50%;
-    background-color: rgb(87, 76, 63);
+    background-color: var(--clock-needle);
     width: 28%;
     height: 2%;
     transform-origin: left center;
