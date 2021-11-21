@@ -1,6 +1,10 @@
 export const MAX_RESIN_COUNT = 160;
 export class Resin {
     constructor() {
+        this.new();
+    }
+
+    new() {
         this.scroll = document.getElementById("resin_scroll");
         let scroll_style = window.getComputedStyle(this.scroll);
         this.number_height = parseFloat(scroll_style.height) / 3.0;
@@ -19,6 +23,18 @@ export class Resin {
         }
 
         this.count = 80;
+        this.scroll_to(80);
+    }
+
+    recreate() {
+        let old_count = this.count;
+        while (this.scroll.firstChild) {
+            this.scroll.removeChild(this.scroll.firstChild);
+        }
+
+        this.new();
+        this.count = old_count;
+        this.scroll_to(old_count);
     }
 
     on_scroll() {

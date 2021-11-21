@@ -49,7 +49,12 @@ impl Resin {
         }
     }
 
-    pub fn clock_bundle(&self, resin_count: u32, color: &str) -> ClockBundle {
+    pub fn clock_bundle(
+        &self,
+        resin_count: u32,
+        outer_color: &str,
+        inner_color: &str,
+    ) -> ClockBundle {
         let restore_minutes = (self.max_resin_count - resin_count) * self.one_resin_restore_minutes;
         let restore = Duration::minutes(restore_minutes as _);
 
@@ -70,30 +75,33 @@ impl Resin {
         let digital_clock_string = format!("{:02}:{:02}", filling.hour, filling.min);
 
         let conic_init = format!(
-            "conic-gradient(from {}deg, hsl(0, 100%, 50%) 0deg, ",
+            "conic-gradient(from {}deg, hsl(0, 75%, 70%) 0deg, ",
             current_analog_hour_deg
         );
         let mut outer_conic = conic_init.clone();
         let mut inner_conic = String::new();
         let restore_hour = restore.num_hours();
         for i in 1..=restore_hour.min(12) {
-            outer_conic += &format!("hsl({}, 100%, 50%) {0}deg, ", i * 30);
+            outer_conic += &format!("hsl({}, 75%, 70%) {0}deg, ", i * 30);
         }
         let restore_deg = restore.num_minutes() as f64 * 0.5;
         if restore_deg > 360.0 {
-            outer_conic += &format!("hsl({}, 100%, 50%) {0}deg)", 360);
+            outer_conic += &format!("hsl({}, 75%, 70%) {0}deg)", 360);
 
             inner_conic = conic_init;
             for i in 1..=restore_hour - 12 {
-                inner_conic += &format!("hsl({}, 100%, 50%) {0}deg, ", i * 30);
+                inner_conic += &format!("hsl({}, 75%, 70%) {0}deg, ", i * 30);
             }
             inner_conic += &format!(
-                "hsl({}, 100%, 50%) {0}deg, {1} {0}deg)",
+                "hsl({}, 75%, 70%) {0}deg, {1} {0}deg)",
                 restore_deg - 360.0,
-                color,
+                inner_color,
             );
         } else {
-            outer_conic += &format!("hsl({}, 100%, 50%) {0}deg, {1} {0}deg)", restore_deg, color);
+            outer_conic += &format!(
+                "hsl({}, 75%, 70%) {0}deg, {1} {0}deg)",
+                restore_deg, outer_color
+            );
         }
 
         ClockBundle {

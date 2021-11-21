@@ -6,15 +6,24 @@ import { LANDSCAPE, view_port } from "./scripts/view_port";
 if (view_port() == LANDSCAPE) {
     document.body.style.flexDirection = "row-reverse";
 }
-let body_color = window.getComputedStyle(document.body).getPropertyValue("--body-background");
-console.log(body_color);
-var resin = new Resin();
-var clock = new Clock();
+let body_style = window.getComputedStyle(document.body);
+let body_color = body_style.getPropertyValue("--body-background");
+let elem_color = body_style.getPropertyValue("--element-background");
+let resin = new Resin();
+let resin_wasm = ResinWasm.new(MAX_RESIN_COUNT, 8);
+let clock = new Clock();
 
-resin_scroll.addEventListener("scroll", on_resin_scroll, { capture: true });
-var resin_wasm = ResinWasm.new(MAX_RESIN_COUNT, 8);
-resin.scroll_to(80);
+resin.scroll.addEventListener("scroll", on_resin_scroll, { capture: true });
 draw_update();
+
+window.onresize = function (e) {
+    if (view_port() == LANDSCAPE) {
+        document.body.style.flexDirection = "row-reverse";
+    } else {
+        document.body.style.flexDirection = null;
+    }
+    resin.recreate();
+}
 
 function on_resin_scroll(e) {
     if (resin.on_scroll()) {
@@ -23,6 +32,6 @@ function on_resin_scroll(e) {
 }
 
 function draw_update() {
-    let clock_bundle = resin_wasm.clock_bundle(resin.count, body_color);
+    let clock_bundle = resin_wasm.clock_bundle(resin.count, body_color, elem_color);
     clock.draw(clock_bundle);
 }
