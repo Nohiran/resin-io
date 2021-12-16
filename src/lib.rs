@@ -21,7 +21,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
 pub struct Resin {
-    max_resin_count: u32,
+    _max_resin_count: u32,
     one_resin_restore_minutes: u32,
 }
 
@@ -44,18 +44,20 @@ struct SimpleDate {
 impl Resin {
     pub fn new(max_resin_count: u32, one_resin_restore_minutes: u32) -> Self {
         Self {
-            max_resin_count,
+            _max_resin_count: max_resin_count,
             one_resin_restore_minutes,
         }
     }
 
     pub fn clock_bundle(
         &self,
-        resin_count: u32,
+        start_resin_count: u32,
+        end_resin_count: u32,
         outer_color: &str,
         inner_color: &str,
     ) -> ClockBundle {
-        let restore_minutes = (self.max_resin_count - resin_count) * self.one_resin_restore_minutes;
+        let restore_resin_count = end_resin_count.checked_sub(start_resin_count).unwrap_or(0);
+        let restore_minutes = restore_resin_count * self.one_resin_restore_minutes;
         let restore = Duration::minutes(restore_minutes as _);
 
         let current_naive = NaiveDateTime::from_timestamp((Date::now() / 1000.0).floor() as _, 0);

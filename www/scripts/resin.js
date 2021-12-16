@@ -1,11 +1,12 @@
 export const MAX_RESIN_COUNT = 160;
 export class Resin {
-    constructor() {
-        this.new();
+    constructor(id) {
+        this.new(id);
     }
 
-    new() {
-        this.scroll = document.getElementById("resin_scroll");
+    new(id) {
+        this.id = id;
+        this.scroll = document.getElementById("resin_scroll_" + id);
         let scroll_style = window.getComputedStyle(this.scroll);
         this.number_height = parseFloat(scroll_style.height) / 3.0;
         let numbers = Array.from(Array(MAX_RESIN_COUNT + 1).keys());
@@ -22,8 +23,8 @@ export class Resin {
             this.scroll.appendChild(number);
         }
 
-        this.count = 80;
-        this.scroll_to(80);
+        this.count = 0;
+        this.scroll_to(0);
     }
 
     recreate() {
@@ -32,8 +33,7 @@ export class Resin {
             this.scroll.removeChild(this.scroll.firstChild);
         }
 
-        this.new();
-        this.count = old_count;
+        this.new(this.id);
         this.scroll_to(old_count);
     }
 
@@ -54,5 +54,6 @@ export class Resin {
         this.scroll.scrollTop = this.count * this.number_height;
         this.scroll.children[old_count].className = "resin_number";
         this.scroll.children[this.count].className = "selected_resin_number";
+        this.count = count;
     }
 }

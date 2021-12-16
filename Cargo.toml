@@ -1,7 +1,6 @@
 [package]
 name = "resin-io"
 version = "0.1.0"
-authors = ["Nohiran <nh218i@icloud.com>"]
 edition = "2018"
 
 [lib]
